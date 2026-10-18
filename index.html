@@ -82,7 +82,7 @@
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"/>
             </svg>
         </button>
-        <button id="open-settings" class="bg-white/80 hover:bg-white text-rose-600 p-3 rounded-full shadow-lg backdrop-blur-sm transition border border-rose-200" title="Đổi nhạc, ảnh & lời chúc">
+        <button id="open-settings" class="bg-white/80 hover:bg-white text-rose-600 p-3 rounded-full shadow-lg backdrop-blur-sm transition border border-rose-200" title="Đổi lời chúc, tên, nhạc & 10 ảnh">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
             </svg>
@@ -104,9 +104,9 @@
             <div class="absolute bottom-2 right-2 text-rose-300 text-xl">❀</div>
 
             <p class="uppercase tracking-widest text-rose-600/80 text-xs md:text-sm font-semibold mb-3">Happy Vietnamese Women's Day</p>
-            <h1 class="text-5xl md:text-7xl font-great-vibes text-rose-700 mb-4 drop-name">Ánh Dương</h1>
+            <h1 id="display-recipient-name" class="text-5xl md:text-7xl font-great-vibes text-rose-700 mb-4 drop-name">Ánh Dương</h1>
             
-            <p class="italic text-gray-600 text-sm md:text-base max-w-lg mx-auto mb-8 font-dancing text-lg md:text-xl">
+            <p id="display-subtitle" class="italic text-gray-600 text-sm md:text-base max-w-lg mx-auto mb-8 font-dancing text-lg md:text-xl">
                 "Chúc công chúa của anh một ngày 20/10 thật rạng rỡ, ngập tràn hạnh phúc và luôn là ánh sáng đẹp nhất trong lòng anh."
             </p>
 
@@ -167,16 +167,19 @@
         </div>
     </section>
 
-    <!-- Thư Tình Gửi Ánh Dương -->
+    <!-- Thư Tình Chân Thành -->
     <section class="py-16 px-4 relative z-10 max-w-3xl mx-auto">
         <div class="bg-white/70 backdrop-blur-md p-8 md:p-12 rounded-3xl shadow-xl border border-rose-100 relative">
-            <div class="absolute -top-6 left-1/2 transform -translate-x-1/2 bg-rose-600 text-white px-6 py-2 rounded-full text-sm font-medium shadow-md uppercase tracking-wider">
+            <div id="letter-title-tag" class="absolute -top-6 left-1/2 transform -translate-x-1/2 bg-rose-600 text-white px-6 py-2 rounded-full text-sm font-medium shadow-md uppercase tracking-wider">
                 Gửi Ánh Dương Thương Yêu
             </div>
             <div class="mt-4 text-center font-dancing text-xl md:text-2xl text-gray-700 space-y-4 leading-relaxed">
-                <p>"Gửi Ánh Dương của anh,</p>
-                <p>Cảm ơn em đã bước vào cuộc đời anh, mang theo ánh sáng ấm áp và những nụ cười ngọt ngào nhất. Nhân ngày 20/10, chúc em luôn xinh đẹp, rạng rỡ và mãi là cô công chúa nhỏ hạnh phúc của anh.</p>
-                <p class="text-rose-600 font-semibold pt-2">Yêu em rất nhiều! ❤️"</p>
+                <p id="display-letter-body">
+                    "Cảm ơn em đã bước vào cuộc đời anh, mang theo ánh sáng ấm áp và những nụ cười ngọt ngào nhất. Nhân ngày 20/10, chúc em luôn xinh đẹp, rạng rỡ và mãi là cô công chúa nhỏ hạnh phúc của anh."
+                </p>
+                <p id="display-sender-name" class="text-rose-600 font-semibold pt-2">
+                    Yêu em rất nhiều! ❤️
+                </p>
             </div>
         </div>
     </section>
@@ -195,26 +198,52 @@
         </div>
     </div>
 
-    <!-- Modal Cài đặt & Thay đổi Nhạc & 10 ảnh -->
+    <!-- Modal Cài đặt TẤT CẢ Thông Tin -->
     <div id="settings-modal" class="fixed inset-0 bg-black/60 z-50 hidden flex items-center justify-center p-4">
         <div class="bg-white w-full max-w-2xl max-h-[90vh] rounded-2xl overflow-hidden shadow-2xl flex flex-col">
             <div class="bg-rose-600 text-white p-4 flex justify-between items-center">
-                <h3 class="font-semibold text-lg">Cài Đặt Nhạc Nền & 10 Ảnh 3D</h3>
+                <h3 class="font-semibold text-lg">Chỉnh Sửa Thông Tin Thiệp & Ảnh</h3>
                 <button id="close-settings" class="text-white hover:text-rose-200 text-xl font-bold">✕</button>
             </div>
             <div class="p-6 overflow-y-auto space-y-5 flex-1">
-                <!-- Phần chỉnh nhạc nền -->
+                
+                <!-- 1. Chỉnh sửa Người nhận & Lời chúc -->
+                <div class="p-4 bg-rose-50 rounded-xl border border-rose-200 space-y-3">
+                    <p class="text-xs font-bold text-rose-800 uppercase tracking-wider block">💌 Thông tin Người nhận & Lời chúc</p>
+                    
+                    <div>
+                        <label class="text-[11px] font-medium text-gray-600">Tên người nhận (Hiển thị trang bìa):</label>
+                        <input type="text" id="recipient-name-input" class="w-full text-xs p-2 border rounded-lg bg-white mt-1">
+                    </div>
+
+                    <div>
+                        <label class="text-[11px] font-medium text-gray-600">Lời chúc ngắn trang bìa:</label>
+                        <textarea id="subtitle-input" rows="2" class="w-full text-xs p-2 border rounded-lg bg-white mt-1"></textarea>
+                    </div>
+
+                    <div>
+                        <label class="text-[11px] font-medium text-gray-600">Nội dung Thư tình:</label>
+                        <textarea id="letter-body-input" rows="3" class="w-full text-xs p-2 border rounded-lg bg-white mt-1"></textarea>
+                    </div>
+
+                    <div>
+                        <label class="text-[11px] font-medium text-gray-600">Tên/Lời nhắn từ người gửi:</label>
+                        <input type="text" id="sender-name-input" class="w-full text-xs p-2 border rounded-lg bg-white mt-1">
+                    </div>
+                </div>
+
+                <!-- 2. Chỉnh nhạc nền -->
                 <div class="p-4 bg-rose-50 rounded-xl border border-rose-200 space-y-2">
                     <label class="text-xs font-bold text-rose-800 uppercase tracking-wider block">🎵 Link Nhạc Nền (MP3 / Google Drive)</label>
-                    <input type="text" id="music-url-input" placeholder="Dán link mp3 hoặc link Google Drive chứa nhạc..." class="w-full text-xs p-2.5 border rounded-lg focus:outline-none focus:border-rose-500 bg-white">
-                    <p class="text-[11px] text-gray-500">Bạn có thể dùng link nhạc `.mp3` trực tiếp hoặc link nhạc upload trên Google Drive.</p>
+                    <input type="text" id="music-url-input" placeholder="Dán link mp3 hoặc link Google Drive..." class="w-full text-xs p-2.5 border rounded-lg focus:outline-none focus:border-rose-500 bg-white">
                 </div>
 
                 <hr class="border-gray-200">
 
+                <!-- 3. Danh sách 10 Ảnh 3D Carousel -->
                 <p class="text-xs font-bold text-gray-700 uppercase tracking-wider">🖼️ Danh sách 10 Ảnh 3D Carousel</p>
                 <div id="image-inputs-container" class="space-y-3">
-                    <!-- Được sinh tự động qua JS -->
+                    <!-- Sinh tự động bằng JS -->
                 </div>
             </div>
             <div class="p-4 bg-gray-50 border-t flex justify-end gap-3">
@@ -225,7 +254,11 @@
 
     <!-- Script Xử lý Logic -->
     <script>
-        // --- 1. Dữ liệu 10 ảnh ---
+        // --- Dữ liệu mặc định ---
+        let recipientName = "Ánh Dương";
+        let subtitleText = '"Chúc công chúa của anh một ngày 20/10 thật rạng rỡ, ngập tràn hạnh phúc và luôn là ánh sáng đẹp nhất trong lòng anh."';
+        let letterBody = '"Cảm ơn em đã bước vào cuộc đời anh, mang theo ánh sáng ấm áp và những nụ cười ngọt ngào nhất. Nhân ngày 20/10, chúc em luôn xinh đẹp, rạng rỡ và mãi là cô công chúa nhỏ hạnh phúc của anh."';
+        let senderName = "Yêu em rất nhiều! ❤️";
         let currentMusicUrl = "https://assets.mixkit.co/music/preview/mixkit-romantic-sensations-455.mp3";
 
         let carouselData = [
@@ -241,7 +274,7 @@
             { url: "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?auto=format&fit=crop&w=600&q=80", caption: "10. Thế giới của anh thu nhỏ lại bằng Ánh Dương 💫" }
         ];
 
-        // --- 2. Xử lý chuyển đổi Link Google Drive thông minh (Cho cả Ảnh và Nhạc) ---
+        // --- Hàm chuyển đổi Link Google Drive thông minh ---
         function parseDirectMediaUrl(url) {
             if (!url) return '';
             let match = url.match(/\/file\/d\/([a-zA-Z0-9_-]+)/) || url.match(/[?&]id=([a-zA-Z0-9_-]+)/);
@@ -251,7 +284,16 @@
             return url;
         }
 
-        // --- 3. Render 3D Carousel ---
+        // Cập nhật thông tin text trên giao diện
+        function updateTextContent() {
+            document.getElementById('display-recipient-name').innerText = recipientName;
+            document.getElementById('display-subtitle').innerText = subtitleText;
+            document.getElementById('display-letter-body').innerText = letterBody;
+            document.getElementById('display-sender-name').innerText = senderName;
+            document.getElementById('letter-title-tag').innerText = `Gửi ${recipientName} Thương Yêu`;
+        }
+
+        // Render 3D Carousel
         const ring = document.getElementById('carousel-ring');
         let currentIndex = 0;
         let isAutoRotate = true;
@@ -318,8 +360,8 @@
 
         startAutoRotate();
 
-        document.getElementById('next-btn').addEventListener('click', () => { rotateNext(); });
-        document.getElementById('prev-btn').addEventListener('click', () => { rotatePrev(); });
+        document.getElementById('next-btn').addEventListener('click', rotateNext);
+        document.getElementById('prev-btn').addEventListener('click', rotatePrev);
 
         const autoBtn = document.getElementById('auto-rotate-btn');
         autoBtn.addEventListener('click', () => {
@@ -337,8 +379,9 @@
 
         window.addEventListener('resize', renderCarousel);
         renderCarousel();
+        updateTextContent();
 
-        // --- 4. Hiệu ứng Canvas Cánh Hoa & Trái Tim Rơi ---
+        // Hiệu ứng Cánh hoa rơi
         const canvas = document.getElementById('petals-canvas');
         const ctx = canvas.getContext('2d');
         let width = canvas.width = window.innerWidth;
@@ -350,9 +393,7 @@
         });
 
         const particles = [];
-        const particleCount = 25;
-
-        for (let i = 0; i < particleCount; i++) {
+        for (let i = 0; i < 25; i++) {
             particles.push({
                 x: Math.random() * width,
                 y: Math.random() * height,
@@ -400,77 +441,72 @@
         }
         drawParticles();
 
-        // --- 5. Đếm ngược đến 20/10/2026 ---
+        // Đếm ngược đến 20/10/2026
         const targetDate = new Date('2026-10-20T00:00:00').getTime();
         function updateCountdown() {
             const now = new Date().getTime();
             const difference = targetDate - now;
 
             if (difference > 0) {
-                const days = Math.floor(difference / (1000 * 60 * 60 * 24));
-                const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
-                const seconds = Math.floor((difference % (1000 * 60)) / 1000);
-
-                document.getElementById('days').innerText = String(days).padStart(2, '0');
-                document.getElementById('hours').innerText = String(hours).padStart(2, '0');
-                document.getElementById('minutes').innerText = String(minutes).padStart(2, '0');
-                document.getElementById('seconds').innerText = String(seconds).padStart(2, '0');
+                document.getElementById('days').innerText = String(Math.floor(difference / (1000 * 60 * 60 * 24))).padStart(2, '0');
+                document.getElementById('hours').innerText = String(Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))).padStart(2, '0');
+                document.getElementById('minutes').innerText = String(Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60))).padStart(2, '0');
+                document.getElementById('seconds').innerText = String(Math.floor((difference % (1000 * 60)) / 1000)).padStart(2, '0');
             }
         }
         setInterval(updateCountdown, 1000);
         updateCountdown();
 
-        // --- 6. Lightbox ---
+        // Lightbox
         const lightbox = document.getElementById('lightbox');
-        const lightboxImg = document.getElementById('lightbox-img');
-        const lightboxCaption = document.getElementById('lightbox-caption');
-        
         function openLightbox(url, caption) {
-            lightboxImg.src = url;
-            lightboxCaption.innerText = caption;
+            document.getElementById('lightbox-img').src = url;
+            document.getElementById('lightbox-caption').innerText = caption;
             lightbox.classList.remove('hidden');
         }
-        document.getElementById('close-lightbox').addEventListener('click', () => {
-            lightbox.classList.add('hidden');
-        });
+        document.getElementById('close-lightbox').addEventListener('click', () => lightbox.classList.add('hidden'));
 
-        // --- 7. Modal Cài đặt (Thay Nhạc & 10 ảnh) ---
+        // Modal Cài Đặt Tất Cả
         const settingsModal = document.getElementById('settings-modal');
         document.getElementById('open-settings').addEventListener('click', () => {
-            // Hiển thị link nhạc hiện tại
+            document.getElementById('recipient-name-input').value = recipientName;
+            document.getElementById('subtitle-input').value = subtitleText;
+            document.getElementById('letter-body-input').value = letterBody;
+            document.getElementById('sender-name-input').value = senderName;
             document.getElementById('music-url-input').value = currentMusicUrl;
 
-            // Render danh sách ô nhập ảnh
             const container = document.getElementById('image-inputs-container');
             container.innerHTML = '';
             carouselData.forEach((item, idx) => {
                 container.innerHTML += `
                     <div class="p-3 bg-gray-50 rounded-xl border space-y-2">
                         <label class="text-xs font-semibold text-rose-700">Ảnh ${idx + 1}</label>
-                        <input type="text" id="url-${idx}" value="${item.url}" placeholder="Dán link Google Drive hoặc URL ảnh..." class="w-full text-xs p-2 border rounded-lg focus:outline-none focus:border-rose-500 bg-white">
-                        <input type="text" id="cap-${idx}" value="${item.caption}" placeholder="Lời chú thích..." class="w-full text-xs p-2 border rounded-lg focus:outline-none focus:border-rose-500 bg-white">
+                        <input type="text" id="url-${idx}" value="${item.url}" placeholder="Dán link Google Drive hoặc URL ảnh..." class="w-full text-xs p-2 border rounded-lg bg-white">
+                        <input type="text" id="cap-${idx}" value="${item.caption}" placeholder="Lời chú thích..." class="w-full text-xs p-2 border rounded-lg bg-white">
                     </div>
                 `;
             });
             settingsModal.classList.remove('hidden');
         });
 
-        document.getElementById('close-settings').addEventListener('click', () => {
-            settingsModal.classList.add('hidden');
-        });
+        document.getElementById('close-settings').addEventListener('click', () => settingsModal.classList.add('hidden'));
 
         document.getElementById('save-settings').addEventListener('click', () => {
-            // Cập nhật nhạc nền
+            // Cập nhật Tên & Lời chúc
+            recipientName = document.getElementById('recipient-name-input').value || recipientName;
+            subtitleText = document.getElementById('subtitle-input').value || subtitleText;
+            letterBody = document.getElementById('letter-body-input').value || letterBody;
+            senderName = document.getElementById('sender-name-input').value || senderName;
+            
+            updateTextContent();
+
+            // Cập nhật Nhạc
             const newMusicUrl = document.getElementById('music-url-input').value;
             if (newMusicUrl && newMusicUrl !== currentMusicUrl) {
                 currentMusicUrl = newMusicUrl;
-                const parsedMusic = parseDirectMediaUrl(newMusicUrl);
-                music.src = parsedMusic;
+                music.src = parseDirectMediaUrl(newMusicUrl);
                 music.load();
-                if (isPlaying) {
-                    music.play().catch(e => console.log(e));
-                }
+                if (isPlaying) music.play().catch(e => console.log(e));
             }
 
             // Cập nhật 10 ảnh
@@ -485,7 +521,7 @@
             renderCarousel();
         });
 
-        // --- 8. Nhạc nền ---
+        // Nhạc nền
         const music = document.getElementById('bg-music');
         const musicToggle = document.getElementById('music-toggle');
         const musicIcon = document.getElementById('music-icon');
