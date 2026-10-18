@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gửi Ánh Dương - Happy 20/10</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Great Vibes & Montserrat & Dancing Script -->
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Great+Vibes&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #fff5f7;
+            color: #4a3b32;
+            overflow-x: hidden;
+        }
+        .font-great-vibes {
+            font-family: 'Great Vibes', cursive;
+        }
+        .font-dancing {
+            font-family: 'Dancing Script', cursive;
+        }
+        /* Hiệu ứng cánh hoa / trái tim rơi */
+        canvas#petals-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 20;
+        }
+        /* 3D Carousel Stage */
+        .carousel-container {
+            perspective: 1200px;
+            width: 100%;
+            height: 360px;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .carousel-ring {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            transform-style: preserve-3d;
+            transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+        .carousel-card {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            width: 190px;
+            height: 260px;
+            margin-left: -95px;
+            margin-top: -130px;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(219, 112, 147, 0.25);
+            background: white;
+            border: 3px solid #fff;
+            cursor: pointer;
+            transition: transform 0.5s ease, filter 0.5s ease, box-shadow 0.5s ease;
+        }
+        @media (min-width: 768px) {
+            .carousel-container { height: 420px; }
+            .carousel-card { width: 230px; height: 310px; margin-left: -115px; margin-top: -155px; }
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-b from-rose-50 via-pink-50 to-amber-50 min-h-screen relative">
+
+    <!-- Canvas cho hiệu ứng cánh hoa/trái tim rơi -->
+    <canvas id="petals-canvas"></canvas>
+
+    <!-- Nút bật/tắt nhạc nền & Mở Cài Đặt -->
+    <div class="fixed top-4 right-4 z-50 flex items-center gap-3">
+        <button id="music-toggle" class="bg-white/80 hover:bg-white text-rose-500 p-3 rounded-full shadow-lg backdrop-blur-sm transition flex items-center justify-center border border-rose-200" title="Bật/Tắt nhạc nền">
+            <svg id="music-icon" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 animate-spin" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"/>
+            </svg>
+        </button>
+        <button id="open-settings" class="bg-white/80 hover:bg-white text-rose-600 p-3 rounded-full shadow-lg backdrop-blur-sm transition border border-rose-200" title="Đổi nhạc, ảnh & lời chúc">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+            </svg>
+        </button>
+    </div>
+
+    <!-- Audio ngầm lãng mạn -->
+    <audio id="bg-music" loop>
+        <source id="music-source" src="https://assets.mixkit.co/music/preview/mixkit-romantic-sensations-455.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- Phần Bìa Chính (Hero Section) -->
+    <section class="min-h-screen flex flex-col items-center justify-center text-center px-4 relative z-10 py-12">
+        <div class="max-w-3xl mx-auto bg-white/60 backdrop-blur-md p-8 md:p-12 rounded-3xl shadow-xl border border-rose-100 relative overflow-hidden">
+            <!-- Viền hoa văn góc -->
+            <div class="absolute top-2 left-2 text-rose-300 text-xl">❀</div>
+            <div class="absolute top-2 right-2 text-rose-300 text-xl">❀</div>
+            <div class="absolute bottom-2 left-2 text-rose-300 text-xl">❀</div>
+            <div class="absolute bottom-2 right-2 text-rose-300 text-xl">❀</div>
+
+            <p class="uppercase tracking-widest text-rose-600/80 text-xs md:text-sm font-semibold mb-3">Happy Vietnamese Women's Day</p>
+            <h1 class="text-5xl md:text-7xl font-great-vibes text-rose-700 mb-4 drop-name">Ánh Dương</h1>
+            
+            <p class="italic text-gray-600 text-sm md:text-base max-w-lg mx-auto mb-8 font-dancing text-lg md:text-xl">
+                "Chúc công chúa của anh một ngày 20/10 thật rạng rỡ, ngập tràn hạnh phúc và luôn là ánh sáng đẹp nhất trong lòng anh."
+            </p>
+
+            <div class="inline-block border-t border-b border-rose-300 py-2 px-6 mb-8 text-rose-800 font-medium tracking-wider text-sm md:text-base">
+                20 . 10 . 2026
+            </div>
+
+            <!-- Đồng hồ đếm ngược -->
+            <div class="mt-2">
+                <p class="text-xs uppercase tracking-widest text-gray-500 mb-3">Cùng đếm ngược đến ngày đặc biệt của em</p>
+                <div class="grid grid-cols-4 gap-2 md:gap-4 max-w-md mx-auto">
+                    <div class="bg-white/80 p-3 rounded-xl shadow-sm border border-rose-100">
+                        <span id="days" class="text-xl md:text-2xl font-bold text-rose-600 block">00</span>
+                        <span class="text-[10px] text-gray-500 uppercase">Ngày</span>
+                    </div>
+                    <div class="bg-white/80 p-3 rounded-xl shadow-sm border border-rose-100">
+                        <span id="hours" class="text-xl md:text-2xl font-bold text-rose-600 block">00</span>
+                        <span class="text-[10px] text-gray-500 uppercase">Giờ</span>
+                    </div>
+                    <div class="bg-white/80 p-3 rounded-xl shadow-sm border border-rose-100">
+                        <span id="minutes" class="text-xl md:text-2xl font-bold text-rose-600 block">00</span>
+                        <span class="text-[10px] text-gray-500 uppercase">Phút</span>
+                    </div>
+                    <div class="bg-white/80 p-3 rounded-xl shadow-sm border border-rose-100">
+                        <span id="seconds" class="text-xl md:text-2xl font-bold text-rose-600 block">00</span>
+                        <span class="text-[10px] text-gray-500 uppercase">Giây</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Phần 3D Carousel 10 Ảnh Kỷ Niệm -->
+    <section class="py-16 px-4 relative z-10 max-w-5xl mx-auto">
+        <div class="text-center mb-10">
+            <h2 class="text-3xl md:text-4xl font-great-vibes text-rose-700 mb-2">Khoảnh Khắc Kỷ Niệm</h2>
+            <p class="text-gray-600 text-sm">Vòng xoay 3D những kỷ niệm tuyệt vời của chúng mình</p>
+        </div>
+
+        <!-- Khung 3D Stage -->
+        <div class="carousel-container mb-8" id="carousel-stage">
+            <div class="carousel-ring" id="carousel-ring">
+                <!-- Các thẻ ảnh 3D sẽ được render tự động qua JavaScript -->
+            </div>
+        </div>
+
+        <!-- Điều khiển Xoay Carousel -->
+        <div class="flex justify-center items-center gap-4 relative z-30">
+            <button id="prev-btn" class="bg-white hover:bg-rose-50 text-rose-600 px-5 py-2.5 rounded-full shadow-md border border-rose-200 text-sm font-medium transition flex items-center gap-1">
+                ❮ Trước
+            </button>
+            <button id="auto-rotate-btn" class="bg-rose-600 hover:bg-rose-700 text-white px-6 py-2.5 rounded-full shadow-md text-sm font-medium transition">
+                Tự Động Xoay: Bật
+            </button>
+            <button id="next-btn" class="bg-white hover:bg-rose-50 text-rose-600 px-5 py-2.5 rounded-full shadow-md border border-rose-200 text-sm font-medium transition flex items-center gap-1">
+                Sau ❯
+            </button>
+        </div>
+    </section>
+
+    <!-- Thư Tình Gửi Ánh Dương -->
+    <section class="py-16 px-4 relative z-10 max-w-3xl mx-auto">
+        <div class="bg-white/70 backdrop-blur-md p-8 md:p-12 rounded-3xl shadow-xl border border-rose-100 relative">
+            <div class="absolute -top-6 left-1/2 transform -translate-x-1/2 bg-rose-600 text-white px-6 py-2 rounded-full text-sm font-medium shadow-md uppercase tracking-wider">
+                Gửi Ánh Dương Thương Yêu
+            </div>
+            <div class="mt-4 text-center font-dancing text-xl md:text-2xl text-gray-700 space-y-4 leading-relaxed">
+                <p>"Gửi Ánh Dương của anh,</p>
+                <p>Cảm ơn em đã bước vào cuộc đời anh, mang theo ánh sáng ấm áp và những nụ cười ngọt ngào nhất. Nhân ngày 20/10, chúc em luôn xinh đẹp, rạng rỡ và mãi là cô công chúa nhỏ hạnh phúc của anh.</p>
+                <p class="text-rose-600 font-semibold pt-2">Yêu em rất nhiều! ❤️"</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="text-center py-8 text-gray-500 text-xs relative z-10">
+        <p>Được thiết kế trọn vẹn yêu thương dành riêng cho Ánh Dương • 20/10</p>
+    </footer>
+
+    <!-- Lightbox Modal xem ảnh lớn -->
+    <div id="lightbox" class="fixed inset-0 bg-black/80 z-50 hidden flex items-center justify-center p-4">
+        <div class="relative max-w-3xl w-full bg-white rounded-2xl overflow-hidden shadow-2xl p-4">
+            <button id="close-lightbox" class="absolute top-4 right-4 text-gray-500 hover:text-rose-600 text-2xl font-bold z-10">✕</button>
+            <img id="lightbox-img" src="" alt="Zoom" class="w-auto max-h-[70vh] mx-auto rounded-lg object-contain mb-3">
+            <p id="lightbox-caption" class="text-center font-dancing text-xl text-rose-700"></p>
+        </div>
+    </div>
+
+    <!-- Modal Cài đặt & Thay đổi Nhạc & 10 ảnh -->
+    <div id="settings-modal" class="fixed inset-0 bg-black/60 z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white w-full max-w-2xl max-h-[90vh] rounded-2xl overflow-hidden shadow-2xl flex flex-col">
+            <div class="bg-rose-600 text-white p-4 flex justify-between items-center">
+                <h3 class="font-semibold text-lg">Cài Đặt Nhạc Nền & 10 Ảnh 3D</h3>
+                <button id="close-settings" class="text-white hover:text-rose-200 text-xl font-bold">✕</button>
+            </div>
+            <div class="p-6 overflow-y-auto space-y-5 flex-1">
+                <!-- Phần chỉnh nhạc nền -->
+                <div class="p-4 bg-rose-50 rounded-xl border border-rose-200 space-y-2">
+                    <label class="text-xs font-bold text-rose-800 uppercase tracking-wider block">🎵 Link Nhạc Nền (MP3 / Google Drive)</label>
+                    <input type="text" id="music-url-input" placeholder="Dán link mp3 hoặc link Google Drive chứa nhạc..." class="w-full text-xs p-2.5 border rounded-lg focus:outline-none focus:border-rose-500 bg-white">
+                    <p class="text-[11px] text-gray-500">Bạn có thể dùng link nhạc `.mp3` trực tiếp hoặc link nhạc upload trên Google Drive.</p>
+                </div>
+
+                <hr class="border-gray-200">
+
+                <p class="text-xs font-bold text-gray-700 uppercase tracking-wider">🖼️ Danh sách 10 Ảnh 3D Carousel</p>
+                <div id="image-inputs-container" class="space-y-3">
+                    <!-- Được sinh tự động qua JS -->
+                </div>
+            </div>
+            <div class="p-4 bg-gray-50 border-t flex justify-end gap-3">
+                <button id="save-settings" class="bg-rose-600 hover:bg-rose-700 text-white px-6 py-2 rounded-xl text-sm font-medium shadow">Lưu thay đổi</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script Xử lý Logic -->
+    <script>
+        // --- 1. Dữ liệu 10 ảnh ---
+        let currentMusicUrl = "https://assets.mixkit.co/music/preview/mixkit-romantic-sensations-455.mp3";
+
+        let carouselData = [
+            { url: "https://lh3.googleusercontent.com/d/1reahF1BlpXri6RuthVpm3jAWvbC0_gD_", caption: "1. Cùng Ánh Dương đi qua những mùa yêu 🌸" },
+            { url: "https://images.unsplash.com/photo-1518199266791-5375a83190b7?auto=format&fit=crop&w=600&q=80", caption: "2. Nụ cười rạng rỡ của em là hạnh phúc của anh ✨" },
+            { url: "https://images.unsplash.com/photo-1522673607200-164d1b6ce486?auto=format&fit=crop&w=600&q=80", caption: "3. Những khoảnh khắc ngọt ngào bên nhau 🌹" },
+            { url: "https://images.unsplash.com/photo-1494774157365-9e04c6720e47?auto=format&fit=crop&w=600&q=80", caption: "4. Nơi nào có em, nơi đó ngập tràn ánh nắng ☀️" },
+            { url: "https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?auto=format&fit=crop&w=600&q=80", caption: "5. Nắm tay em đi qua mọi con đường 💖" },
+            { url: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=600&q=80", caption: "6. Công chúa nhỏ của anh 👑" },
+            { url: "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=600&q=80", caption: "7. Kỷ niệm tuyệt vời nhất thanh xuân 🌷" },
+            { url: "https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?auto=format&fit=crop&w=600&q=80", caption: "8. Yêu em từ những điều giản dị nhất 💕" },
+            { url: "https://images.unsplash.com/photo-1502823403499-6ccfcf4fb433?auto=format&fit=crop&w=600&q=80", caption: "9. Mãi bên nhau bạn nhé! 🌻" },
+            { url: "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?auto=format&fit=crop&w=600&q=80", caption: "10. Thế giới của anh thu nhỏ lại bằng Ánh Dương 💫" }
+        ];
+
+        // --- 2. Xử lý chuyển đổi Link Google Drive thông minh (Cho cả Ảnh và Nhạc) ---
+        function parseDirectMediaUrl(url) {
+            if (!url) return '';
+            let match = url.match(/\/file\/d\/([a-zA-Z0-9_-]+)/) || url.match(/[?&]id=([a-zA-Z0-9_-]+)/);
+            if (match && match[1]) {
+                return `https://lh3.googleusercontent.com/d/${match[1]}`;
+            }
+            return url;
+        }
+
+        // --- 3. Render 3D Carousel ---
+        const ring = document.getElementById('carousel-ring');
+        let currentIndex = 0;
+        let isAutoRotate = true;
+        let autoRotateInterval;
+        const totalCards = carouselData.length;
+
+        function renderCarousel() {
+            ring.innerHTML = '';
+            const angleStep = 360 / totalCards;
+            const radius = window.innerWidth >= 768 ? 340 : 210;
+
+            carouselData.forEach((item, index) => {
+                const card = document.createElement('div');
+                card.className = 'carousel-card flex flex-col';
+                
+                const angle = angleStep * index - (currentIndex * angleStep);
+                card.style.transform = `rotateY(${angle}deg) translateZ(${radius}px)`;
+
+                const normalizedAngle = (angle % 360 + 360) % 360;
+                if (normalizedAngle > 60 && normalizedAngle < 300) {
+                    card.style.opacity = '0.35';
+                    card.style.filter = 'blur(2px)';
+                    card.style.pointerEvents = 'none';
+                } else {
+                    card.style.opacity = '1';
+                    card.style.filter = 'none';
+                    card.style.pointerEvents = 'auto';
+                }
+
+                const imgUrl = parseDirectMediaUrl(item.url);
+                card.innerHTML = `
+                    <div class="w-full h-4/5 overflow-hidden bg-gray-100">
+                        <img src="${imgUrl}" alt="Memory" class="w-full h-full object-cover">
+                    </div>
+                    <div class="w-full h-1/5 bg-white flex items-center justify-center px-2">
+                        <p class="text-[11px] md:text-xs font-dancing text-rose-700 truncate">${item.caption}</p>
+                    </div>
+                `;
+
+                card.addEventListener('click', () => {
+                    openLightbox(imgUrl, item.caption);
+                });
+
+                ring.appendChild(card);
+            });
+        }
+
+        function rotateNext() {
+            currentIndex = (currentIndex + 1) % totalCards;
+            renderCarousel();
+        }
+
+        function rotatePrev() {
+            currentIndex = (currentIndex - 1 + totalCards) % totalCards;
+            renderCarousel();
+        }
+
+        function startAutoRotate() {
+            autoRotateInterval = setInterval(rotateNext, 3000);
+        }
+        function stopAutoRotate() {
+            clearInterval(autoRotateInterval);
+        }
+
+        startAutoRotate();
+
+        document.getElementById('next-btn').addEventListener('click', () => { rotateNext(); });
+        document.getElementById('prev-btn').addEventListener('click', () => { rotatePrev(); });
+
+        const autoBtn = document.getElementById('auto-rotate-btn');
+        autoBtn.addEventListener('click', () => {
+            isAutoRotate = !isAutoRotate;
+            if (isAutoRotate) {
+                startAutoRotate();
+                autoBtn.textContent = "Tự Động Xoay: Bật";
+                autoBtn.className = "bg-rose-600 hover:bg-rose-700 text-white px-6 py-2.5 rounded-full shadow-md text-sm font-medium transition";
+            } else {
+                stopAutoRotate();
+                autoBtn.textContent = "Tự Động Xoay: Tắt";
+                autoBtn.className = "bg-gray-300 hover:bg-gray-400 text-gray-700 px-6 py-2.5 rounded-full shadow-md text-sm font-medium transition";
+            }
+        });
+
+        window.addEventListener('resize', renderCarousel);
+        renderCarousel();
+
+        // --- 4. Hiệu ứng Canvas Cánh Hoa & Trái Tim Rơi ---
+        const canvas = document.getElementById('petals-canvas');
+        const ctx = canvas.getContext('2d');
+        let width = canvas.width = window.innerWidth;
+        let height = canvas.height = window.innerHeight;
+
+        window.addEventListener('resize', () => {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+        });
+
+        const particles = [];
+        const particleCount = 25;
+
+        for (let i = 0; i < particleCount; i++) {
+            particles.push({
+                x: Math.random() * width,
+                y: Math.random() * height,
+                size: Math.random() * 8 + 6,
+                speedY: Math.random() * 1 + 0.5,
+                speedX: Math.random() * 1 - 0.5,
+                rotation: Math.random() * 360,
+                rotationSpeed: Math.random() * 2 - 1,
+                opacity: Math.random() * 0.6 + 0.3,
+                type: Math.random() > 0.5 ? 'petal' : 'heart'
+            });
+        }
+
+        function drawParticles() {
+            ctx.clearRect(0, 0, width, height);
+            particles.forEach(p => {
+                ctx.save();
+                ctx.translate(p.x, p.y);
+                ctx.rotate((p.rotation * Math.PI) / 180);
+                ctx.globalAlpha = p.opacity;
+
+                if (p.type === 'petal') {
+                    ctx.fillStyle = '#ffb6c1';
+                    ctx.beginPath();
+                    ctx.ellipse(0, 0, p.size, p.size / 2, 0, 0, Math.PI * 2);
+                    ctx.fill();
+                } else {
+                    ctx.fillStyle = '#ff69b4';
+                    ctx.font = `${p.size * 1.5}px sans-serif`;
+                    ctx.fillText('❤', 0, 0);
+                }
+
+                ctx.restore();
+
+                p.y += p.speedY;
+                p.x += p.speedX;
+                p.rotation += p.rotationSpeed;
+
+                if (p.y > height + 20) {
+                    p.y = -20;
+                    p.x = Math.random() * width;
+                }
+            });
+            requestAnimationFrame(drawParticles);
+        }
+        drawParticles();
+
+        // --- 5. Đếm ngược đến 20/10/2026 ---
+        const targetDate = new Date('2026-10-20T00:00:00').getTime();
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const difference = targetDate - now;
+
+            if (difference > 0) {
+                const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+                document.getElementById('days').innerText = String(days).padStart(2, '0');
+                document.getElementById('hours').innerText = String(hours).padStart(2, '0');
+                document.getElementById('minutes').innerText = String(minutes).padStart(2, '0');
+                document.getElementById('seconds').innerText = String(seconds).padStart(2, '0');
+            }
+        }
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+
+        // --- 6. Lightbox ---
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+        const lightboxCaption = document.getElementById('lightbox-caption');
+        
+        function openLightbox(url, caption) {
+            lightboxImg.src = url;
+            lightboxCaption.innerText = caption;
+            lightbox.classList.remove('hidden');
+        }
+        document.getElementById('close-lightbox').addEventListener('click', () => {
+            lightbox.classList.add('hidden');
+        });
+
+        // --- 7. Modal Cài đặt (Thay Nhạc & 10 ảnh) ---
+        const settingsModal = document.getElementById('settings-modal');
+        document.getElementById('open-settings').addEventListener('click', () => {
+            // Hiển thị link nhạc hiện tại
+            document.getElementById('music-url-input').value = currentMusicUrl;
+
+            // Render danh sách ô nhập ảnh
+            const container = document.getElementById('image-inputs-container');
+            container.innerHTML = '';
+            carouselData.forEach((item, idx) => {
+                container.innerHTML += `
+                    <div class="p-3 bg-gray-50 rounded-xl border space-y-2">
+                        <label class="text-xs font-semibold text-rose-700">Ảnh ${idx + 1}</label>
+                        <input type="text" id="url-${idx}" value="${item.url}" placeholder="Dán link Google Drive hoặc URL ảnh..." class="w-full text-xs p-2 border rounded-lg focus:outline-none focus:border-rose-500 bg-white">
+                        <input type="text" id="cap-${idx}" value="${item.caption}" placeholder="Lời chú thích..." class="w-full text-xs p-2 border rounded-lg focus:outline-none focus:border-rose-500 bg-white">
+                    </div>
+                `;
+            });
+            settingsModal.classList.remove('hidden');
+        });
+
+        document.getElementById('close-settings').addEventListener('click', () => {
+            settingsModal.classList.add('hidden');
+        });
+
+        document.getElementById('save-settings').addEventListener('click', () => {
+            // Cập nhật nhạc nền
+            const newMusicUrl = document.getElementById('music-url-input').value;
+            if (newMusicUrl && newMusicUrl !== currentMusicUrl) {
+                currentMusicUrl = newMusicUrl;
+                const parsedMusic = parseDirectMediaUrl(newMusicUrl);
+                music.src = parsedMusic;
+                music.load();
+                if (isPlaying) {
+                    music.play().catch(e => console.log(e));
+                }
+            }
+
+            // Cập nhật 10 ảnh
+            for (let i = 0; i < totalCards; i++) {
+                const u = document.getElementById(`url-${i}`).value;
+                const c = document.getElementById(`cap-${i}`).value;
+                if (u) carouselData[i].url = u;
+                if (c) carouselData[i].caption = c;
+            }
+
+            settingsModal.classList.add('hidden');
+            renderCarousel();
+        });
+
+        // --- 8. Nhạc nền ---
+        const music = document.getElementById('bg-music');
+        const musicToggle = document.getElementById('music-toggle');
+        const musicIcon = document.getElementById('music-icon');
+        let isPlaying = false;
+
+        musicToggle.addEventListener('click', () => {
+            if (isPlaying) {
+                music.pause();
+                musicIcon.classList.remove('animate-spin');
+            } else {
+                music.play().catch(e => console.log(e));
+                musicIcon.classList.add('animate-spin');
+            }
+            isPlaying = !isPlaying;
+        });
+    </script>
+</body>
+</html>
