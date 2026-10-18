@@ -49,10 +49,10 @@
             position: absolute;
             left: 50%;
             top: 50%;
-            width: 190px;
-            height: 260px;
-            margin-left: -95px;
-            margin-top: -130px;
+            width: 200px;
+            height: 280px;
+            margin-left: -100px;
+            margin-top: -140px;
             border-radius: 16px;
             overflow: hidden;
             box-shadow: 0 10px 25px rgba(219, 112, 147, 0.25);
@@ -63,7 +63,7 @@
         }
         @media (min-width: 768px) {
             .carousel-container { height: 420px; }
-            .carousel-card { width: 230px; height: 310px; margin-left: -115px; margin-top: -155px; }
+            .carousel-card { width: 240px; height: 320px; margin-left: -120px; margin-top: -160px; }
         }
     </style>
 </head>
@@ -135,11 +135,11 @@
         </div>
     </section>
 
-    <!-- Phần 3D Carousel 10 Ảnh Kỷ Niệm -->
+    <!-- Phần 3D Carousel 3 Ảnh Kỷ Niệm -->
     <section class="py-16 px-4 relative z-10 max-w-5xl mx-auto">
         <div class="text-center mb-10">
             <h2 class="text-3xl md:text-4xl font-great-vibes text-rose-700 mb-2">Khoảnh Khắc Kỷ Niệm</h2>
-            <p class="text-gray-600 text-sm">Vòng xoay 3D những kỷ niệm tuyệt vời của chúng mình</p>
+            <p class="text-gray-600 text-sm">Vòng xoay 3D 3 bức ảnh ý nghĩa nhất của chúng mình</p>
         </div>
 
         <div class="carousel-container mb-8" id="carousel-stage">
@@ -172,10 +172,9 @@
                 <p id="display-sender-message" class="text-rose-600 font-semibold pt-2">
                     Yêu em rất nhiều! ❤️
                 </p>
-                <!-- Hiển thị Chữ ký người gửi -->
                 <div class="pt-4 border-t border-rose-200/60 max-w-xs mx-auto">
                     <p class="text-xs font-sans uppercase tracking-widest text-gray-400 mb-1">Người gửi</p>
-                    <p id="display-signature" class="font-great-vibes text-3xl text-rose-700 font-bold">Người yêu của em</p>
+                    <p id="display-signature" class="font-great-vibes text-3xl text-rose-700 font-bold">Người yêu của em Quốc Hưng</p>
                 </div>
             </div>
         </div>
@@ -203,9 +202,8 @@
             </div>
             <div class="p-6 overflow-y-auto space-y-5 flex-1">
                 
-                <!-- 1. Chỉnh sửa Người nhận, Người gửi, Chữ ký & Lời chúc -->
                 <div class="p-4 bg-rose-50 rounded-xl border border-rose-200 space-y-3">
-                    <p class="text-xs font-bold text-rose-800 uppercase tracking-wider block">💌 Người nhận, Người gửi & Chữ ký</p>
+                    <p class="text-xs font-bold text-rose-800 uppercase tracking-wider block">💌 Người nhận, Lời chúc & Chữ ký</p>
                     
                     <div>
                         <label class="text-[11px] font-medium text-gray-600">Tên người nhận (Trang bìa & Thư):</label>
@@ -223,7 +221,7 @@
                     </div>
 
                     <div>
-                        <label class="text-[11px] font-medium text-gray-600">Lời nhắn cuối thư (ví dụ: Yêu em rất nhiều!):</label>
+                        <label class="text-[11px] font-medium text-gray-600">Lời nhắn cuối thư:</label>
                         <input type="text" id="sender-message-input" class="w-full text-xs p-2 border rounded-lg bg-white mt-1 focus:border-rose-500 outline-none">
                     </div>
 
@@ -233,7 +231,6 @@
                     </div>
                 </div>
 
-                <!-- 2. Chỉnh nhạc nền -->
                 <div class="p-4 bg-rose-50 rounded-xl border border-rose-200 space-y-2">
                     <label class="text-xs font-bold text-rose-800 uppercase tracking-wider block">🎵 Link Nhạc Nền (MP3 / Google Drive)</label>
                     <input type="text" id="music-url-input" placeholder="Dán link mp3 hoặc link Google Drive..." class="w-full text-xs p-2.5 border rounded-lg focus:outline-none focus:border-rose-500 bg-white">
@@ -241,8 +238,8 @@
 
                 <hr class="border-gray-200">
 
-                <!-- 3. Danh sách 10 Ảnh 3D Carousel -->
-                <p class="text-xs font-bold text-gray-700 uppercase tracking-wider">🖼️ Danh sách 10 Ảnh 3D Carousel</p>
+                <!-- Danh sách 3 Ảnh -->
+                <p class="text-xs font-bold text-gray-700 uppercase tracking-wider">🖼️ Danh sách 3 Ảnh 3D Carousel</p>
                 <div id="image-inputs-container" class="space-y-3"></div>
             </div>
             <div class="p-4 bg-gray-50 border-t flex justify-end gap-3">
@@ -253,7 +250,6 @@
 
     <!-- Script Xử lý Logic -->
     <script>
-        // Dữ liệu mặc định
         let recipientName = "Ánh Dương";
         let subtitleText = '"Chúc công chúa của anh một ngày 20/10 thật rạng rỡ, ngập tràn hạnh phúc và luôn là ánh sáng đẹp nhất trong lòng anh."';
         let letterBody = '"Cảm ơn em đã bước vào cuộc đời anh, mang theo ánh sáng ấm áp và những nụ cười ngọt ngào nhất. Nhân ngày 20/10, chúc em luôn xinh đẹp, rạng rỡ và mãi là cô công chúa nhỏ hạnh phúc của anh."';
@@ -261,20 +257,13 @@
         let senderSignature = "Người yêu của em";
         let currentMusicUrl = "https://assets.mixkit.co/music/preview/mixkit-romantic-sensations-455.mp3";
 
+        // Dữ liệu 3 ảnh kỷ niệm
         let carouselData = [
-            { url: "https://lh3.googleusercontent.com/d/1reahF1BlpXri6RuthVpm3jAWvbC0_gD_", caption: "1. Cùng Ánh Dương đi qua những mùa yêu 🌸" },
-            { url: "https://images.unsplash.com/photo-1518199266791-5375a83190b7?auto=format&fit=crop&w=600&q=80", caption: "2. Nụ cười rạng rỡ của em là hạnh phúc của anh ✨" },
-            { url: "https://images.unsplash.com/photo-1522673607200-164d1b6ce486?auto=format&fit=crop&w=600&q=80", caption: "3. Những khoảnh khắc ngọt ngào bên nhau 🌹" },
-            { url: "https://images.unsplash.com/photo-1494774157365-9e04c6720e47?auto=format&fit=crop&w=600&q=80", caption: "4. Nơi nào có em, nơi đó ngập tràn ánh nắng ☀️" },
-            { url: "https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?auto=format&fit=crop&w=600&q=80", caption: "5. Nắm tay em đi qua mọi con đường 💖" },
-            { url: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=600&q=80", caption: "6. Công chúa nhỏ của anh 👑" },
-            { url: "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=600&q=80", caption: "7. Kỷ niệm tuyệt vời nhất thanh xuân 🌷" },
-            { url: "https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?auto=format&fit=crop&w=600&q=80", caption: "8. Yêu em từ những điều giản dị nhất 💕" },
-            { url: "https://images.unsplash.com/photo-1502823403499-6ccfcf4fb433?auto=format&fit=crop&w=600&q=80", caption: "9. Mãi bên nhau bạn nhé! 🌻" },
-            { url: "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?auto=format&fit=crop&w=600&q=80", caption: "10. Thế giới của anh thu nhỏ lại bằng Ánh Dương 💫" }
+            { url: "https://lh3.googleusercontent.com/d/1reahF1BlpXri6RuthVpm3jAWvbC0_gD_", caption: "1. Khoảnh khắc tuyệt vời bên Ánh Dương 🌸" },
+            { url: "https://drive.google.com/file/d/1ebgLquAZuFKEBo33eSHUJRWckRzxHcOI/view?usp=sharing", caption: "2. Nụ cười rạng rỡ của em ✨" },
+            { url: "https://drive.google.com/file/d/1OAH4Ux6RaUwewFaOH5fu95pAMOu-WRzJ/view?usp=sharing", caption: "3. Mãi bên nhau hạnh phúc 🌹" }
         ];
 
-        // Tự động chuyển đổi link Google Drive
         function parseDirectMediaUrl(url) {
             if (!url) return '';
             let match = url.match(/\/file\/d\/([a-zA-Z0-9_-]+)/) || url.match(/[?&]id=([a-zA-Z0-9_-]+)/);
@@ -284,7 +273,6 @@
             return url;
         }
 
-        // Cập nhật giao diện chữ & chữ ký
         function updateTextContent() {
             document.getElementById('display-recipient-name').innerText = recipientName;
             document.getElementById('display-subtitle').innerText = subtitleText;
@@ -295,7 +283,6 @@
             document.getElementById('footer-recipient-name').innerText = recipientName;
         }
 
-        // Render Carousel 3D
         const ring = document.getElementById('carousel-ring');
         let currentIndex = 0;
         let isAutoRotate = true;
@@ -305,7 +292,7 @@
         function renderCarousel() {
             ring.innerHTML = '';
             const angleStep = 360 / totalCards;
-            const radius = window.innerWidth >= 768 ? 340 : 210;
+            const radius = window.innerWidth >= 768 ? 220 : 150;
 
             carouselData.forEach((item, index) => {
                 const card = document.createElement('div');
@@ -315,14 +302,12 @@
                 card.style.transform = `rotateY(${angle}deg) translateZ(${radius}px)`;
 
                 const normalizedAngle = (angle % 360 + 360) % 360;
-                if (normalizedAngle > 60 && normalizedAngle < 300) {
-                    card.style.opacity = '0.35';
-                    card.style.filter = 'blur(2px)';
-                    card.style.pointerEvents = 'none';
+                if (normalizedAngle > 90 && normalizedAngle < 270) {
+                    card.style.opacity = '0.4';
+                    card.style.filter = 'blur(1px)';
                 } else {
                     card.style.opacity = '1';
                     card.style.filter = 'none';
-                    card.style.pointerEvents = 'auto';
                 }
 
                 const imgUrl = parseDirectMediaUrl(item.url);
